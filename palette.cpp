@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
   
   if (argc != 5) 
      {
-       printf("Usage: ImageIn.pgm ImageOut1.pgm ImageOutZ.pgm K \n"); 
+       printf("Usage: ImageIn.pgm ImageOut1.pgm ImageOut2.pgm K \n"); 
        exit (1) ;
      }
    
@@ -41,12 +41,14 @@ int main(int argc, char* argv[])
    
    lire_nb_lignes_colonnes_image_ppm(cNomImgLue, &nH, &nW);
    nTaille = nH * nW;
+
+   int nTaille2563 = K * 3;
   
    int nTaille3 = nTaille * 3;
    allocation_tableau(ImgIn, OCTET, nTaille3);
    lire_image_ppm(cNomImgLue, ImgIn, nH * nW);
    allocation_tableau(ImgOut, OCTET, nTaille3);
-   allocation_tableau(ImgOut2, OCTET, nTaille3);
+   allocation_tableau(ImgOut2, OCTET, nTaille2563);
 
     std::vector<couleurPoint> listCouleur;
 
@@ -102,7 +104,7 @@ int main(int argc, char* argv[])
         }
     }
     
-    for (int i = 0; i < nTaille3; i+=3) {
+    /*for (int i = 0; i < nTaille3; i+=3) {
         double index = (double)i/(nTaille3/K);
 
         std::cout << floor(index) << std::endl;
@@ -110,12 +112,31 @@ int main(int argc, char* argv[])
         ImgOut2[i] = listCouleur[floor(index)].r;
         ImgOut2[i+1] = listCouleur[floor(index)].g;
         ImgOut2[i+2] = listCouleur[floor(index)].b;
-    }
-    
+    }*/
+
+    /*for (int i = 0; i < nTaille2563; i+=3) {
+        double index = (double)i/(nTaille3/K);
+
+        std::cout << floor(index) << std::endl;
+
+        std::cout << i << " " << i/3 << std::endl;
+
+        ImgOut2[i] = listCouleur[i/3].r;
+        ImgOut2[i+1] = listCouleur[i/3].g;
+        ImgOut2[i+2] = listCouleur[i/3].b;
+    }*/
+
+    for (int i=0; i < K*3; i+=3){ 
+
+        std::cout << i << " " << i/3 << std::endl;
+        ImgOut2[i] = listCouleur[i/3].r;
+        ImgOut2[i+1] = listCouleur[i/3].g;
+        ImgOut2[i+2] = listCouleur[i/3].b;
+   } 
 
 
    ecrire_image_ppm(cNomImgEcrite, ImgOut,  nH, nW);
-   ecrire_image_ppm(cNomImgEcrite2, ImgOut2,  nH, nW);
+   ecrire_image_ppm(cNomImgEcrite2, ImgOut2,  16, 16);
    free(ImgIn); free(ImgOut); free(ImgOut2);
    return 1;
 }

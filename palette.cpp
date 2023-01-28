@@ -103,32 +103,9 @@ int main(int argc, char* argv[])
             }
         }
     }
-    
-    /*for (int i = 0; i < nTaille3; i+=3) {
-        double index = (double)i/(nTaille3/K);
-
-        std::cout << floor(index) << std::endl;
-
-        ImgOut2[i] = listCouleur[floor(index)].r;
-        ImgOut2[i+1] = listCouleur[floor(index)].g;
-        ImgOut2[i+2] = listCouleur[floor(index)].b;
-    }*/
-
-    /*for (int i = 0; i < nTaille2563; i+=3) {
-        double index = (double)i/(nTaille3/K);
-
-        std::cout << floor(index) << std::endl;
-
-        std::cout << i << " " << i/3 << std::endl;
-
-        ImgOut2[i] = listCouleur[i/3].r;
-        ImgOut2[i+1] = listCouleur[i/3].g;
-        ImgOut2[i+2] = listCouleur[i/3].b;
-    }*/
 
     for (int i=0; i < K*3; i+=3){ 
 
-        std::cout << i << " " << i/3 << std::endl;
         ImgOut2[i] = listCouleur[i/3].r;
         ImgOut2[i+1] = listCouleur[i/3].g;
         ImgOut2[i+2] = listCouleur[i/3].b;
